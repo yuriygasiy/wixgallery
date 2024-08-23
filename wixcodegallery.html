@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея</title>
+    <style>
+        .TCDGaleryery {
+            max-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+        }
+
+        .TCDcardery {
+            width: 10%;
+            height: 100%;
+            transition: all 0.5s;
+            border-radius: 20px;
+            background-position: center center;
+            background-size: cover;
+            cursor: pointer;
+        }
+
+        .TCDcardery:first-child {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .TCDopenery {
+            border-radius: 20px;
+            width: 100% !important;
+        }
+
+        .TCDshrunkery {
+            width: 10% !important;
+        }
+
+        .TCDcardery + .TCDcardery {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="TCDGaleryery"></div>
+
+    <script>
+        const TCDimageUrlsery = 'https://static.wixstatic.com/media/1f8c65_bc2f43ea8dae4086ac9b66dcd676a4ca~mv2.jpeg, https://static.wixstatic.com/media/1f8c65_cdfd237aeed548e0abd5900155f3eec4~mv2.jpeg, https://static.wixstatic.com/media/1f8c65_76a81257fc674394b694183a687ae56e~mv2.jpeg, https://static.wixstatic.com/media/1f8c65_c4cfb40d9a8e4a1cb49c84c0797d7a85~mv2.jpeg, https://static.wixstatic.com/media/1f8c65_ac3b91a9ff9543aa8835cd6744e5797d~mv2.jpeg, https://static.wixstatic.com/media/1f8c65_cd9b0286d2ac4dcfb9fb55f8a302654d~mv2.jpeg';
+        const TCDGaleryery = document.querySelector('.TCDGaleryery');
+        const TCDurlsArrayery = TCDimageUrlsery.split(',').map(url => url.trim());
+
+        TCDurlsArrayery.forEach((url, index) => {
+            const TCDcardery = document.createElement('div');
+            TCDcardery.classList.add('TCDcardery');
+            TCDcardery.style.backgroundImage = `url(${url})`;
+            TCDcardery.addEventListener('mouseenter', () => expandCardery(TCDcardery));
+            TCDGaleryery.appendChild(TCDcardery);
+        });
+
+        function expandCardery(TCDcardery) {
+            resetCardsery();
+            TCDcardery.classList.add('TCDopenery');
+            const siblings = Array.from(TCDcardery.parentNode.children).filter(sibling => sibling !== TCDcardery);
+            siblings.forEach(sibling => sibling.classList.add('TCDshrunkery'));
+        }
+
+        function resetCardsery() {
+            const TiCodecartsery = document.querySelectorAll('.TCDcardery');
+            TiCodecartsery.forEach(TCDcardery => {
+                TCDcardery.classList.remove('TCDopenery');
+                TCDcardery.classList.remove('TCDshrunkery');
+            });
+        }
+    </script>
+</body>
+</html>
